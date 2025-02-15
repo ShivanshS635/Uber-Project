@@ -34,7 +34,7 @@ userSchema.methods.generateAuthToken = function(){
     return token = jwt.sign({_id : this._id} , process.env.JWT_SECRET , {expiresIn : '1d'}
 )};
 
-userSchema.method.comparePassword = async function(enteredPassword){
+userSchema.methods.comparePassword = async function(enteredPassword){
     return await bcrypt.compare(enteredPassword , this.password);
 };
 

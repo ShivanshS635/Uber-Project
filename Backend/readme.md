@@ -50,3 +50,57 @@ The request body should be in JSON format and contain the following fields:
     "message": "Email already registered"
 }
 ```
+
+# /users/login Endpoint Documentation
+
+## Description
+
+This endpoint is used to authenticate users and provide a token for accessing protected routes.
+
+## Request Method
+
+POST
+
+## Endpoint URL
+
+/users/login
+
+## Request Body
+
+The request body should be in JSON format and contain the following fields:
+
+```json
+{
+  "email": "string",     // Required: User's email address. Must be a valid email format.
+  "password": "string"   // Required: User's password. Must be at least 6 characters long.
+}
+```
+
+## Response Codes
+
+| Status Code | Description                                                      |
+| ----------- | ---------------------------------------------------------------- |
+| 200         | OK: User successfully authenticated.                             |
+| 400         | Bad Request: Indicates that the server could not understand the request due to invalid syntax. |
+| 401         | Unauthorized: Invalid email or password.                         |
+| 500         | Internal Server Error: Indicates a server-side error.            |
+
+## Example Success Response
+
+```json
+{
+    "token": "jwtToken",
+    "user": {
+        "id": "uniqueUserId",
+        "email": "user@example.com"
+    }
+}
+```
+
+## Example Error Response
+
+```json
+{
+    "message": "Invalid Email or Password"
+}
+```
