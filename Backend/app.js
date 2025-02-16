@@ -14,7 +14,10 @@ app.use(cookieParser());
 db();
 
 const userRoutes = require('./routes/user.routes');
+const captainRoutes = require('./routes/captain.routes');
+
 app.use('/users', userRoutes);
+app.use('/captains', captainRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

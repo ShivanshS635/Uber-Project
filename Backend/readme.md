@@ -194,3 +194,77 @@ Authorization: Bearer <token>
     "message": "Unauthorized"
 }
 ```
+
+# /captains/register Endpoint Documentation
+
+## Description
+
+This endpoint is used to register new captains in the system. It requires specific captain details including vehicle information.
+
+## Request Method
+
+POST
+
+## Endpoint URL
+
+/captains/register
+
+## Request Body
+
+The request body should be in JSON format and contain the following fields:
+
+```json
+{
+  "fullname": {
+    "firstname": "string", // Required: Captain's first name.
+    "lastname": "string"   // Optional: Captain's last name.
+  },
+  "email": "string",       // Required: Captain's email address.
+  "password": "string",    // Required: Captain's password. Minimum 6 characters.
+  "vehicle": {
+      "color": "string",   // Required: Vehicle color. Minimum 3 characters.
+      "plate": "string",   // Required: Vehicle plate. Minimum 3 characters.
+      "capacity": "number",// Required: Vehicle capacity. Must be at least 1.
+      "vehicleType": "string" // Required: Type of vehicle. Allowed values: 'car', 'motorcycle', 'auto'.
+  }
+}
+```
+
+## Response Codes
+
+| Status Code | Description                                             |
+| ----------- | ------------------------------------------------------- |
+| 201         | Created: Captain successfully registered.             |
+| 400         | Bad Request: Invalid input or captain already exists.   |
+| 500         | Internal Server Error: Server encountered an error.     |
+
+## Example Success Response
+
+```json
+{
+    "token": "jwtToken",
+    "captain": {
+        "id": "uniqueCaptainId",
+        "email": "captain@example.com",
+        "fullname": {
+            "firstname": "John",
+            "lastname": "Doe"
+        },
+        "vehicle": {
+            "color": "blue",
+            "plate": "ABC123",
+            "capacity": 4,
+            "vehicleType": "car"
+        }
+    }
+}
+```
+
+## Example Error Response
+
+```json
+{
+    "message": "Captain Already Registered"
+}
+```
+````
