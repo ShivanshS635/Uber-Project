@@ -267,4 +267,165 @@ The request body should be in JSON format and contain the following fields:
     "message": "Captain Already Registered"
 }
 ```
-````
+
+# /captains/login Endpoint Documentation
+
+## Description
+
+This endpoint is used to authenticate captains and provide a token for accessing protected routes.
+
+## Request Method
+
+POST
+
+## Endpoint URL
+
+/captains/login
+
+## Request Body
+
+The request body should be in JSON format and include:
+
+```json
+{
+  "email": "string",    // Required: Captain's email address.
+  "password": "string"  // Required: Captain's password. Minimum 6 characters.
+}
+```
+
+## Response Codes
+
+| Status Code | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| 200         | OK: Captain successfully authenticated.            |
+| 400         | Bad Request: Invalid input.                          |
+| 404         | Not Found: Captain does not exist.                 |
+| 500         | Internal Server Error.                               |
+
+## Example Success Response
+
+```json
+{
+    "token": "jwtToken",
+    "captain": {
+        "id": "uniqueCaptainId",
+        "email": "captain@example.com",
+        "fullname": {
+            "firstname": "John",
+            "lastname": "Doe"
+        },
+        "vehicle": {
+            "color": "blue",
+            "plate": "ABC123",
+            "capacity": 4,
+            "vehicleType": "car"
+        }
+    }
+}
+```
+
+## Example Error Response
+
+```json
+{
+    "message": "Captain Not Found or Invalid Password"
+}
+```
+
+# /captains/profile Endpoint Documentation
+
+## Description
+
+This endpoint returns the profile details of the authenticated captain.
+
+## Request Method
+
+GET
+
+## Endpoint URL
+
+/captains/profile
+
+## Request Headers
+
+Authorization: Bearer <token>
+
+## Response Codes
+
+| Status Code | Description                                            |
+| ----------- | ------------------------------------------------------ |
+| 200         | OK: Returns captain profile details.                 |
+| 401         | Unauthorized: Invalid or missing token.              |
+| 500         | Internal Server Error.                                 |
+
+## Example Success Response
+
+```json
+{
+    "captain": {
+        "id": "uniqueCaptainId",
+        "email": "captain@example.com",
+        "fullname": {
+            "firstname": "John",
+            "lastname": "Doe"
+        },
+        "vehicle": {
+            "color": "blue",
+            "plate": "ABC123",
+            "capacity": 4,
+            "vehicleType": "car"
+        }
+        // ...other captain fields...
+    }
+}
+```
+
+## Example Error Response
+
+```json
+{
+    "message": "Unauthorized"
+}
+```
+
+# /captains/logout Endpoint Documentation
+
+## Description
+
+This endpoint logs out the captain by clearing the token and adding it to a blacklist.
+
+## Request Method
+
+GET
+
+## Endpoint URL
+
+/captains/logout
+
+## Request Headers
+
+Authorization: Bearer <token>
+
+## Response Codes
+
+| Status Code | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| 200         | OK: Captain logged out successfully.               |
+| 401         | Unauthorized: Invalid or missing token.            |
+| 500         | Internal Server Error.                               |
+
+## Example Success Response
+
+```json
+{
+    "message": "Captain Logged Out Successfully"
+}
+```
+
+## Example Error Response
+
+```json
+{
+    "message": "Unauthorized"
+}
+```
