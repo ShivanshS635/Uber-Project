@@ -26,7 +26,6 @@ module.exports.registerCaptain = async (req, res, next) => {
             vehicleType: vehicle.vehicleType
         });
         const token = captain.generateAuthToken();
-        res.cookie('token', token);
         res.status(201).json({token , captain});
     } catch (error) {
         next(error);

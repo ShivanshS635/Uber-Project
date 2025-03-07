@@ -10,7 +10,7 @@ module.exports.register = async (req, res, next) => {
     }
 
     const {fullname , email , password} = req.body;
-    const isUserAlreadyRegistered = await userSchema.findOne.email({ email });
+    const isUserAlreadyRegistered = await userSchema.findOne({ email });
     if (isUserAlreadyRegistered) {
         return res.status(400).json({ message: 'User Already Registered' });
     }
