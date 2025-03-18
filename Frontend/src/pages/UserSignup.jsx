@@ -25,7 +25,7 @@ const UserSignup = () => {
       password: password
     }
 
-    const response = await axios.post(`${import.meta.env.VITE_URL}/users/register`, newUser)
+    const response = await axios.post(`${process.env.VITE_URL}/users/register`, newUser)
     if(response.status === 200 || response.status === 201){
       setUser(response.data)
       navigate("/home")
