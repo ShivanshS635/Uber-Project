@@ -19,7 +19,7 @@ const UserLogin = () => {
             email : email , 
             password : password 
         };
-        const response = await axios.post(`https://uber-project-xp2z.onrender.com/users/login`, userData);
+        const response = await axios.post(`${process.env.VITE_URL}/users/login`, userData);
 
         if(response.status === 200 || response.status === 201){
             setUser(response.data);
