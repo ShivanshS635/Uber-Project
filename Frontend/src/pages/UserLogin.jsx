@@ -19,7 +19,7 @@ const UserLogin = () => {
             email : email , 
             password : password 
         };
-
+        console.log(import.meta.env.VITE_URL)
         const response = await axios.post(`${import.meta.env.VITE_URL}/users/login`, userData);
 
         if(response.status === 200 || response.status === 201){
